@@ -1,38 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 const auth = require('../middleware/auth');
-
-const ExpenseSchema = new Schema({
-    amount: {
-        type: Number,
-        required: [true, 'Please add an amount'],
-    },
-    description: {
-        type: String,
-        required: [true, 'Please add a description'],
-        trim: true
-    },
-    category: {
-        type: String,
-        required: [true, 'Please add a category'],
-        trim: true
-    },
-    date: {
-        type: Date,
-        default: Date.now
-    },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    }
-}, {
-    timestamps: true
-});
-
-const Expense = mongoose.model('Expense', ExpenseSchema);
+const Expense = require('../models/Expense');
 
 // Add expense
 router.post('/add', auth, async (req, res) => {
@@ -64,4 +33,3 @@ router.get('/list', auth, async (req, res) => {
 });
 
 module.exports = router;
-
