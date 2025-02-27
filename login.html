@@ -15,21 +15,17 @@
     <h2 class="text-3xl font-bold mb-6">
      Login 
     </h2>
-    <form class="space-y-7">
-     <div class="flex items-center border-b border-gray-300 py-2">
-      <i class="fas fa-user text-gray-400 mr-3">
-      </i>
-      <input aria-label="Your Name" class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" placeholder="Your Name" type="text"/>
-     </div>
+    <form id="loginForm" class="space-y-7">
+     
      <div class="flex items-center border-b border-gray-300 py-2">
       <i class="fas fa-envelope text-gray-400 mr-3">
       </i>
-      <input aria-label="Your Email" class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" placeholder="Your Email" type="email"/>
+      <input type="email" id="email" name="email" aria-label="Your Email" class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" placeholder="Your Email" type="email"/>
      </div>
      <div class="flex items-center border-b border-gray-300 py-2">
       <i class="fas fa-lock text-gray-400 mr-3">
       </i>
-      <input aria-label="Password" class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" placeholder="Password" type="password"/>
+      <input type="password" id="password" name="password" aria-label="Password" class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" placeholder="Password" type="password"/>
      </div>
     
      <div class="flex items-center pt-6">
@@ -50,6 +46,19 @@
     <img alt="Illustration of a desk with a laptop, plant, and chair" class="w-80 h-96 object-contain" height="600" src="https://storage.googleapis.com/a1aa/image/LVgjxaj2YP7w_7eneaCTauFgdAsDtXIRAeZKzl7fPXc.jpg" width="300"/>
    </div>
   </div>
-  
+  <script>
+  document.getElementById('loginForm').addEventListener('submit', function(event) {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    // Simple client-side validation
+    if (!email || !password) {
+        alert('Please fill in both fields');
+        event.preventDefault(); // prevent form submission if validation fails
+    }
+
+    // Further backend validation will happen after form submission
+});
+</script>
  </body>
 </html>
