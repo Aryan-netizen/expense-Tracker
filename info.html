@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white shadow-md rounded-lg overflow-hidden w-full max-w-4xl flex flex-col md:flex-row">
+        <div class="w-full md:w-1/2 p-8">
+            <h2 class="text-2xl font-semibold text-blue-600 mb-6">General Information</h2>
+            <form>
+                <div class="flex flex-col md:flex-row mb-4">
+                    <div class="w-full md:w-1/2 md:mr-2 mb-4 md:mb-0">
+                        <label class="block text-gray-700">First Name</label>
+                        <input type="text" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-blue-500" 
+                               pattern="[A-Za-z]+" required>
+                    </div>
+                    <div class="w-full md:w-1/2 md:ml-2">
+                        <label class="block text-gray-700">Last Name</label>
+                        <input type="text" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-blue-500" 
+                               pattern="[A-Za-z]+" required>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Position</label>
+                    <select id="position" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-blue-500" onchange="updateCompanyLabel()">
+                        <option value="default">Select Position</option>
+                        <option value="student">Student</option>
+                        <option value="employee">Employee/Businessman</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label id="companyLabel" class="block text-gray-700">Company</label>
+                    <input type="text" class="w-full border-b-2 border-gray-300 focus:outline-none focus:border-blue-500" required>
+                </div>
+        </div>
+        <div class="w-full md:w-1/2 p-8 bg-blue-600 text-white">
+            <h2 class="text-2xl font-semibold mb-6">Contact Details</h2>
+                <div class="mb-4">
+                    <label class="block">Additional Information</label>
+                    <input type="text" class="w-full border-b-2 border-blue-400 bg-blue-600 focus:outline-none focus:border-white">
+                </div>
+                <div class="mb-4">
+                    <label class="block">Location</label>
+                    <input type="text" class="w-full border-b-2 border-blue-400 bg-blue-600 text-white focus:outline-none focus:border-white p-2" 
+                           placeholder="Enter place">
+                </div>
+                <div class="mb-4">
+                    <label class="block">Country</label>
+                    <select id="country" class="w-full border-b-2 border-blue-400 bg-blue-600 text-white focus:outline-none focus:border-white" onchange="updateCountryCode()">
+                        <option value="">Select Country</option>
+                        <option value="+91">India</option>
+                        <option value="+1">USA</option>
+                        <option value="+86">China</option>
+                        <option value="+7">Russia</option>
+                        <option value="+1">Canada</option>
+                    </select>
+                </div>
+                <div class="flex flex-col md:flex-row mb-4">
+                    <div class="w-full md:w-1/2 md:mr-2 mb-4 md:mb-0">
+                        <label class="block">Code</label>
+                        <input id="code" type="text" class="w-1/4 border-b-2 border-blue-400 bg-blue-600 focus:outline-none focus:border-white" 
+                               pattern="\d+" maxlength="4" required readonly>
+                    </div>
+                    <div class="w-full md:w-1/2 md:ml-2">
+                        <label class="block">Phone Number</label>
+                        <input type="text" class="w-full border-b-2 border-blue-400 bg-blue-600 focus:outline-none focus:border-white" 
+                               pattern="\d+" maxlength="10" required>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="block">Your Email</label>
+                    <input type="email" class="w-full border-b-2 border-blue-400 bg-blue-600 focus:outline-none focus:border-white" required>
+                </div>
+                <div class="mb-4 flex items-center">
+                    <input type="checkbox" class="mr-2" required>
+                    <label class="text-sm">I do accept the <a href="#" class="underline">Terms and Conditions</a> of your site.</label>
+                </div>
+                <button class="bg-white text-blue-600 font-semibold py-2 px-4 rounded-full">Register Badge</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function updateCompanyLabel() {
+            let position = document.getElementById("position").value;
+            let companyLabel = document.getElementById("companyLabel");
+
+            if (position === "student") {
+                companyLabel.innerText = "College";
+            } else {
+                companyLabel.innerText = "Company";
+            }
+        }
+
+        function updateCountryCode() {
+            let countrySelect = document.getElementById("country");
+            let countryCode = document.getElementById("code");
+
+            countryCode.value = countrySelect.value; // Updates code based on selected country
+        }
+    </script>
+</body>
+</html>
