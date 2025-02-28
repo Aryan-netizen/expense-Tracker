@@ -51,6 +51,12 @@
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
+    if(user) {
+      localStorage.setItem("loggedInUser", JSON.stringify(user));
+    } else {
+      alert('Invalid email or password');
+    }
+
     // Simple client-side validation
     if (!email || !password) {
         alert('Please fill in both fields');

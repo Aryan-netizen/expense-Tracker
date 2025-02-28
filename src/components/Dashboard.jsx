@@ -109,6 +109,26 @@ const sub = [
   },
 ];
 
+document.addEventListener("DOMContentLoaded", function () {
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  if (loggedInUser) {
+    document.getElementById("userName").innerText = loggedInUser.name;
+  } else {
+    document.getElementById("userName").innerText = "Guest";
+  }
+});
+
+useEffect(() => {
+  // Get the logged-in user from localStorage
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+  // If user exists, set the name
+  if (loggedInUser) {
+    setUserName(loggedInUser.name);
+  }
+}, []);
+
+
 const exp = [
   {
     title: "Youtube Subscription",
@@ -157,6 +177,7 @@ const exp = [
   },
 ];
 
+
 function Dashboard() {
   return (
     <div className="w-full h-fit p-4">
@@ -172,9 +193,9 @@ function Dashboard() {
               </div>
               <div className="ml-4">
                 <CardHeader>
-                  <h2 className="text-lg sm:text-xl">Good morning</h2>
+                  <h2 className="text-lg sm:text-xl">Hello There!</h2>
                   <h2 className="text-2xl sm:text-3xl leading-none">
-                    Aryan Garg
+                    {userName}
                   </h2>
                   <CardDescription className="text-sm sm:text-base">
                     24 August, Thursday

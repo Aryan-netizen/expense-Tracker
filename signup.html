@@ -11,41 +11,7 @@
         <div class="w-full md:w-1/2 p-6">
             <h2 class="text-3xl font-bold mb-6 text-gray-800">Sign up</h2>
             
-            <!-- <form class="space-y-4">
-                <div class="flex items-center border-b border-gray-300 py-2">
-                    <i class="fas fa-user text-gray-400 mr-3"></i>
-                    <input aria-label="Your Name" class="appearance-none bg-transparent border-none w-full text-gray-700 py-1 px-2 focus:outline-none" placeholder="Your Name" type="text"/>
-                </div>
-                
-                <div class="flex items-center border-b border-gray-300 py-2">
-                    <i class="fas fa-envelope text-gray-400 mr-3"></i>
-                    <input aria-label="Your Email" class="appearance-none bg-transparent border-none w-full text-gray-700 py-1 px-2 focus:outline-none" placeholder="Your Email" type="email"/>
-                </div>
-                
-                <div class="flex items-center border-b border-gray-300 py-2">
-                    <i class="fas fa-lock text-gray-400 mr-3"></i>
-                    <input aria-label="Password" class="appearance-none bg-transparent border-none w-full text-gray-700 py-1 px-2 focus:outline-none" placeholder="Password" type="password"/>
-                </div>
-                
-                <div class="flex items-center border-b border-gray-300 py-2">
-                    <i class="fas fa-lock text-gray-400 mr-3"></i>
-                    <input aria-label="Repeat your password" class="appearance-none bg-transparent border-none w-full text-gray-700 py-1 px-2 focus:outline-none" placeholder="Repeat your password" type="password"/>
-                </div>
-                
-                
-                <div class="flex items-center">
-                    <input class="form-checkbox h-4 w-4 text-blue-600" type="checkbox" style="cursor: pointer;"/>
-                    <label class="ml-2 text-gray-700">
-                        I agree to all statements in 
-                        <a class="text-blue-600 hover:underline" href="#">Terms of service</a>
-                    </label>
-                </div>
-                
-                
-                <button class="w-full bg-blue-500  text-white py-2 px-4 rounded hover:bg-blue-600">
-                    Register
-                </button>
-            </form> -->
+            
             <form id="signupForm" class="space-y-4">
                 <div class="flex items-center border-b border-gray-300 py-2">
                     <i class="fas fa-user text-gray-400 mr-3"></i>
@@ -77,7 +43,7 @@
             
             <!-- Already Member Section (Now Under Image) -->
             <div class="mt-4 text-center">
-                <a class="text-blue-600 hover:underline" href="#">I am already a member</a>
+                <a class="text-blue-600 hover:underline" href="/login3.html">I am already a member</a>
             </div>
         </div>
         
@@ -90,6 +56,9 @@
         const name = document.getElementById("name").value;
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
+
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+        users.push({ name, email, password });
     
         const response = await fetch("http://localhost:5000/signup", { // Change URL if different
             method: "POST",
