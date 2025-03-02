@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Form,
   FormControl,
@@ -109,24 +109,7 @@ const sub = [
   },
 ];
 
-document.addEventListener("DOMContentLoaded", function () {
-  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-  if (loggedInUser) {
-    document.getElementById("userName").innerText = loggedInUser.name;
-  } else {
-    document.getElementById("userName").innerText = "Guest";
-  }
-});
 
-useEffect(() => {
-  // Get the logged-in user from localStorage
-  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-
-  // If user exists, set the name
-  if (loggedInUser) {
-    setUserName(loggedInUser.name);
-  }
-}, []);
 
 
 const exp = [
@@ -179,6 +162,31 @@ const exp = [
 
 
 function Dashboard() {
+const [userName, setUserName] = useState("Guest");
+const [expenses, setExpenses] = useState(exp);
+
+const formatDate = (date) => {
+const options = { day: 'numeric', month: 'long', weekday: 'long' };
+return date ? new Date(date).toLocaleDateString('en-US', options) : new Date().toLocaleDateString('en-US', options);
+};
+
+useEffect(() => {
+    // Get the logged-in user from localStorage
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+    // If user exists, set the name
+    if (loggedInUser) {
+    setUserName(loggedInUser.name);
+    }
+}, []);
+
+const addExpense = (newExpense) => {
+    setExpenses([...expenses, {
+    title: newExpense.title,
+    des: newExpense.description,
+    cost: parseFloat(newExpense.amount)
+    }]);
+};
   return (
     <div className="w-full h-fit p-4">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -194,14 +202,14 @@ function Dashboard() {
               <div className="ml-4">
                 <CardHeader>
                   <h2 className="text-lg sm:text-xl">Hello There!</h2>
-                  <h2 className="text-2xl sm:text-3xl leading-none">
+                <h2 className="text-2xl sm:text-3xl leading-none">
                     {userName}
-                  </h2>
-                  <CardDescription className="text-sm sm:text-base">
-                    24 August, Thursday
-                  </CardDescription>
+                </h2>
+                <CardDescription className="text-sm sm:text-base">
+                    {formatDate(new Date())}
+                </CardDescription>
                 </CardHeader>
-              </div>
+            </div>
             </div>
           </Card>
           <Card className="p-4 h-full">
@@ -218,7 +226,7 @@ function Dashboard() {
                   <SheetHeader>
                     <SheetTitle>Add Your Expense</SheetTitle>
                     <SheetDescription>
-                      <ExpenseForm/>
+                    <ExpenseForm onAddExpense={addExpense} />
                     </SheetDescription>
                   </SheetHeader>
                 </SheetContent>
@@ -237,9 +245,9 @@ function Dashboard() {
                   <CardTitle className="text-lg sm:text-xl">
                     Expense Distribution
                   </CardTitle>
-                  <CardDescription className="text-sm sm:text-base">
-                    24 August, Thursday
-                  </CardDescription>
+                <CardDescription className="text-sm sm:text-base">
+                {formatDate(new Date())}
+                </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <ScrollArea className="h-[33vh] w-full rounded-md p-4 scrollbar-hide">
@@ -319,7 +327,7 @@ function Dashboard() {
                     <div className="ml-4">
                       <CardHeader>
                         <CardDescription className="text-sm sm:text-base">
-                          20 August, 2021
+                        {formatDate(new Date())}
                         </CardDescription>
                       </CardHeader>
                       <CardContent>
@@ -342,11 +350,11 @@ function Dashboard() {
               <TableCaption className="text-sm sm:text-base">
                 A list of your recent expenses.
               </TableCaption>
-              <TableBody>
-                {exp.map((item, i) => (
-                  <TableRow key={i}>
+            <TableBody>
+            {expenses.map((item, i) => (
+                <TableRow key={i}>
                     <TableCell className="font-medium text-sm sm:text-base">
-                      20 August 2021
+                    {formatDate(new Date())}
                     </TableCell>
                     <TableCell className="flex flex-col text-sm sm:text-base">
                       <p className="font-medium">{item.title}</p>
